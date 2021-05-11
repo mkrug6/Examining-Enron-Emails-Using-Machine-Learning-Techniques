@@ -6,7 +6,7 @@ from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
 from analyze import analyze, fix, try_classifiers, scatter, histogram
 from outliers import remove_outliers, find_outliers
-from features import create_new_features
+from features import create_new_features, find_optimal_features
 
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.

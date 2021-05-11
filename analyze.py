@@ -9,6 +9,40 @@ from sklearn.cross_validation import train_test_split, StratifiedShuffleSplit
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.grid_search import GridSearchCV
 from numpy import mean
+import matplotlib.pyplot as plt
+
+def scatter(data, features):
+    """
+    Renders a scatter plot based on the provided features and data
+    """
+    points = featureFormat(data, features)
+
+    # Now let's plot this points
+    for point in points:
+        plt.scatter(point[0], point[1])
+
+    plt.xlabel(features[0])
+    plt.ylabel(features[1])
+    plt.show()
+
+    return points
+
+
+def histogram(data, feature):
+    """
+    Renders a scatter plot based on the provided features and data
+
+    :param feature:
+    :param data:
+    :return: rendered points
+    """
+    points = featureFormat(data, [feature])
+
+    plt.hist(points)
+    plt.xlabel(feature)
+    plt.show()
+
+    return points
 
 
 def analyze(data):
