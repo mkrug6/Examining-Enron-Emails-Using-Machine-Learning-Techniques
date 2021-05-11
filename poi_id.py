@@ -4,7 +4,7 @@ import os
 import pickle
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
-from analyze import analyze, fix, try_classifiers
+from analyze import analyze, fix, try_classifiers, scatter, histogram
 from outliers import remove_outliers, find_outliers
 from features import create_new_features
 
