@@ -21,9 +21,10 @@ nltk==3.2.1 numpy==1.11.2 scikit-learn==0.18 scipy==0.18.1
 I used a virtual machine running Ubuntu 16.04 however you may use Anaconda or other tools as you see fit to set up your environment.
 
 #### References/Sources Used
-https://github.com/smerrick/enron-emails-ml
-https://github.com/benjaminsoellner/DAND_5_MachineLearningEnronData/tree/master/final_project
-https://github.com/jeswingeorge/Enron-Email-Dataset
-https://github.com/bajcmartinez/Udacity-Identify-Fraud-from-Enron-Email
-https://scikit-learn.org/stable/tutorial/index.html
+
+* https://github.com/smerrick/enron-emails-ml
+* https://github.com/benjaminsoellner/DAND_5_MachineLearningEnronData/tree/master/final_project
+* https://github.com/jeswingeorge/Enron-Email-Dataset
+* https://github.com/bajcmartinez/Udacity-Identify-Fraud-from-Enron-Email
+* https://scikit-learn.org/stable/tutorial/index.html
 
