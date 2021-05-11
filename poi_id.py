@@ -4,7 +4,7 @@ import os
 import pickle
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
-from analyse import analyse, fix, try_classifiers
+from analyze import analyze, fix, try_classifiers
 from outliers import remove_outliers, find_outliers
 from features import create_new_features
 
@@ -42,7 +42,7 @@ with open("pickle_files/final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Get an understanding of how many people are in the dataset
-analyse(data_dict)
+analyze(data_dict)
 
 ### Fixes issues in the dataset (NaN values)
 data_dict = fix(data_dict)
