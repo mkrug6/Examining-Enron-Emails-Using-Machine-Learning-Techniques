@@ -6,11 +6,10 @@ In 2000, Enron was one of the largest companies in the United States. By 2002, i
 ### Explanation of Files and How-To
 
 Unzip all files to a directory of your choice and execute poi_id.py.
-analyse.py - analyzes the dataset and creates plots
+analyse.py - analyzes the dataset and contains plot functions
 feature_format.py - file from Udacity 
 features.py - runs through machine learning programs and chooses the best one
 outliers.py - finds and removes outliers from the dataset
-plots.py - script to make plots easier
 poi_id.py - the main file. Run in python 2.7
 tester.py - file from Udacity
 
