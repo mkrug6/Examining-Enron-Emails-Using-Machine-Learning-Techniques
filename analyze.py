@@ -1,5 +1,5 @@
 from pprint import pprint
-from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
@@ -67,13 +67,6 @@ def fix(data):
 def evaluate_clf(grid_search, features, labels, params, iters=100):
     """
     Evaluate a classifier
-
-    :param grid_search:
-    :param features:
-    :param labels:
-    :param params:
-    :param iters:
-    :return:
     """
     acc = []
     pre = []
@@ -98,11 +91,6 @@ def evaluate_clf(grid_search, features, labels, params, iters=100):
 def try_classifiers(data, features_list, tune=False):
     """
     Try a variety of classifiers for the given features
-
-    :param data:
-    :param features_list
-    :param tune:
-    :return:
     """
     print('Trying classifiers for features: [{}]'.format(', '.join(features_list)))
     # ds = featureFormat(data, features_list, sort_keys=True)
