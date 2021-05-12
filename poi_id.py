@@ -1,11 +1,12 @@
 import sys
 import os
-#sys.path.append(os.getcwd()[:os.getcwd().index('src')])
 import pickle
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
-from analyze import analyze, fix, try_classifiers, scatter, histogram
-from outliers import remove_outliers, find_outliers
+from analyze import analyze, fix
+from plots import  scatter, histogram
+from classify import try_classifiers
+from outliers import find_outliers, remove_outliers
 from features import create_new_features, find_optimal_features
 
 ### Task 1: Select what features you'll use.
@@ -38,7 +39,7 @@ created_features = [
 features_list = poi_label + financial_features
 
 ### Load the dictionary containing the dataset
-with open("pickle_files/final_project_dataset.pkl", "r") as data_file:
+with open("./final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Get an understanding of how many people are in the dataset
@@ -47,10 +48,13 @@ analyze(data_dict)
 ### Fixes issues in the dataset (NaN values)
 data_dict = fix(data_dict)
 
-### Task 2: Remove outliers
+### Task 2: Find and Remove outliers
 outliers = find_outliers(data_dict)
 my_dataset = remove_outliers(data_dict, outliers)
 
+#View Data after outliers have been Removed
+
+scatter(my_dataset, ['salary', 'bonus'])
 
 ### Task 3: Create new feature(s)
 ### Store to my_dataset for easy export below.
@@ -66,23 +70,6 @@ labels, features = targetFeatureSplit(data)
 ### you'll need to use Pipelines. For more info:
 ### http://scikit-learn.org/stable/modules/pipeline.html
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Task 5: Tune your classifier to achieve better than .3 precision and recall
 ### using our testing script. Check the tester.py script in the final project
 ### folder for details on the evaluation method, especially the test_classifier
@@ -90,75 +77,16 @@ labels, features = targetFeatureSplit(data)
 ### stratified shuffle split cross validation. For more info:
 ### http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.StratifiedShuffleSplit.html
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Though is not the best idea, let's run the classifiers against the full features list
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# For fun, runniing cclassifiiers against fun
 
 print("Trying classifiers with the complete feature list")
 try_classifiers(my_dataset, features_list)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Now let's try to move from there to finding the best features for the task
-
-
-
-
-
-
-
 
 print("Trying classifiers with the optimal feature list")
 optimal_features_list = find_optimal_features(my_dataset, features_list)
 clf = try_classifiers(my_dataset, optimal_features_list, True)
-
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure

@@ -68,7 +68,7 @@ def create_new_features(data):
             data[person]['bonus_over_salary_ratio'] = 0
 
     #Render of data in a histogram
-    
+
     histogram(data, 'bonus_over_salary_ratio')
 
     return data

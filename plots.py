@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 def scatter(data, features):
     """
     Renders a scatter plot based on the provided features and data
-
     :param data:
     :param features:
     :return: rendered points
@@ -26,7 +25,6 @@ def scatter(data, features):
 def histogram(data, feature):
     """
     Renders a scatter plot based on the provided features and data
-
     :param feature:
     :param data:
     :return: rendered points
