@@ -86,7 +86,7 @@ try_classifiers(my_dataset, features_list)
 
 print("Trying classifiers with the optimal feature list")
 optimal_features_list = find_optimal_features(my_dataset, features_list)
-clf = try_classifiers(my_dataset, optimal_features_list, True)
+clf = try_classifiers(my_dataset, optimal_features_list)
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure
