@@ -1,9 +1,12 @@
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from tester import test_classifier
 from sklearn.grid_search import GridSearchCV
-from feature_format import targetFeatureSplit
+from feature_format import featureFormat, targetFeatureSplit
+from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit
 
 def evaluate_clf(grid_search, features, labels, params, iters=100):
     """
@@ -34,18 +37,40 @@ def try_classifiers(data, features_list):
     Tries different classifiers and then chooses the best one
     """
 
+    data = featureFormat(data, features_list, sort_keys = True)
+    labels, features = targetFeatureSplit(data)
+
+    features_train, features_test, labels_train, labels_test = \
+        train_test_split(features, labels, test_size=0.3, random_state=42)
+
     print('Trying GaussianNB')
     clf_gb = GaussianNB()
-
     clf_gb_grid_search = GridSearchCV(clf_gb, {})
-    test_classifier(clf_gb_grid_search, data, features_list)
-    # evaluate_clf(nb_grid_search, features, labels, {})
+    clf_gb_grid_search.fit(features_train, labels_train)
+    clf_gb_grid_search.best_estimator_
 
     print('Trying SVC')
+    
     clf_svc = SVC(kernel='linear', max_iter=1000)
     clf_svc_grid_search = GridSearchCV(clf_svc, {})
-    test_classifier(clf_svc_grid_search, data, features_list)
-    # evaluate_clf(nb_grid_search, features, labels, {})
+    clf_svc_grid_search.fit(features_train, labels_train)
+    clf_svc_grid_search.best_estimator_
 
+    print('Trying AdaBoost')
+    clf_ab = AdaBoostClassifier(DecisionTreeClassifier(
+        max_depth=1,
+        min_samples_leaf=2,
+        class_weight='balanced'),
+        n_estimators=50,
+        learning_rate=.8)
+
+    clf_ab_grid_search = GridSearchCV(clf_ab, {})
+
+    clf_ab_grid_search.fit(features_train, labels_train)
+    
+    clf_ab_grid_search.best_estimator_
+
+    test_classifier(clf_ab_grid_search, data, features_list)
+   
     # Return the one which perform the best
-    return clf_gb_grid_search
+    return clf_ab_grid_search

@@ -44,7 +44,13 @@ def remove_outliers(data, outliers):
     print("Items on the DS before removal:", len(ds))
 
     for outlier in outliers:
-        ds.pop(outlier, None)
-
-
+    
+        print("Do you want to remove the below outlier? (y/n)")
+        print(outlier)
+    
+        reply = str(raw_input(' (y/n): ')).lower().strip()
+        if reply[0] == 'y':
+            ds.pop(outlier, None)
+        if reply[0] == 'n':
+            print('If you say so!')
     return ds
