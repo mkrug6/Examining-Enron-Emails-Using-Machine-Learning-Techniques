@@ -43,6 +43,19 @@ def try_classifiers(data, features_list):
     features_train, features_test, labels_train, labels_test = \
         train_test_split(features, labels, test_size=0.3, random_state=42)
 
+    print('Trying AdaBoost')
+    clf_ab = AdaBoostClassifier(DecisionTreeClassifier(
+        max_depth=1,
+        min_samples_leaf=2,
+        class_weight='balanced'),
+        n_estimators=50,
+        learning_rate=.8)
+
+    clf_ab_grid_search = GridSearchCV(clf_ab, {})
+    clf_ab_grid_search.fit(features_train, labels_train)
+    clf_ab_grid_search.best_estimator_
+    test_classifier(clf_ab_grid_search, data, features_list)
+
     print('Trying GaussianNB')
     clf_gb = GaussianNB()
     clf_gb_grid_search = GridSearchCV(clf_gb, {})
@@ -55,22 +68,6 @@ def try_classifiers(data, features_list):
     clf_svc_grid_search = GridSearchCV(clf_svc, {})
     clf_svc_grid_search.fit(features_train, labels_train)
     clf_svc_grid_search.best_estimator_
-
-    print('Trying AdaBoost')
-    clf_ab = AdaBoostClassifier(DecisionTreeClassifier(
-        max_depth=1,
-        min_samples_leaf=2,
-        class_weight='balanced'),
-        n_estimators=50,
-        learning_rate=.8)
-
-    clf_ab_grid_search = GridSearchCV(clf_ab, {})
-
-    clf_ab_grid_search.fit(features_train, labels_train)
-    
-    clf_ab_grid_search.best_estimator_
-
-    test_classifier(clf_ab_grid_search, data, features_list)
    
     # Return the one which perform the best
     return clf_ab_grid_search
